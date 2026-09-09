@@ -7,12 +7,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-deep: #050b18;
-            --bg-gradient: radial-gradient(circle at 50% 0%, #0a1931 0%, #050b18 70%);
-            --card-bg: rgba(15, 30, 60, 0.45);
-            --card-border: rgba(255, 255, 255, 0.1);
+            --bg-deep: #030712;
+            --card-bg: rgba(13, 22, 42, 0.65);
+            --card-border: rgba(56, 189, 248, 0.15);
             --accent-grad: linear-gradient(135deg, #ffffff 0%, #38bdf8 50%, #0284c7 100%);
-            --accent-glow: rgba(56, 189, 248, 0.25);
+            --accent-glow: rgba(56, 189, 248, 0.35);
             --text-main: #f8fafc;
             --text-muted: #94a3b8;
             --correct: #34d399;
@@ -27,26 +26,54 @@
         }
 
         body {
-            background: var(--bg-deep);
-            background-image: var(--bg-gradient);
+            background-color: var(--bg-deep);
             color: var(--text-main);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             overflow-x: hidden;
+            position: relative;
         }
+
+        /* Ambient Animated Background & Border Decorations */
+        .bg-glow-orb {
+            position: fixed;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(56, 189, 248, 0.12) 0%, rgba(2, 132, 199, 0.03) 60%, transparent 100%);
+            border-radius: 50%;
+            z-index: 0;
+            pointer-events: none;
+            filter: blur(60px);
+        }
+        .orb-1 { top: -150px; left: -150px; }
+        .orb-2 { bottom: -150px; right: -150px; }
+
+        /* Side Cyber Borders */
+        .border-decor-left, .border-decor-right {
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            width: 12px;
+            background: linear-gradient(to bottom, transparent, rgba(56, 189, 248, 0.25), transparent);
+            z-index: 99;
+            pointer-events: none;
+        }
+        .border-decor-left { left: 0; border-right: 1px dashed rgba(56, 189, 248, 0.2); }
+        .border-decor-right { right: 0; border-left: 1px dashed rgba(56, 189, 248, 0.2); }
 
         /* Top Navbar */
         header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 24px 5%;
+            padding: 24px 6%;
             border-bottom: 1px solid var(--card-border);
-            backdrop-filter: blur(16px);
+            backdrop-filter: blur(20px);
             position: sticky;
             top: 0;
             z-index: 100;
+            background: rgba(3, 7, 18, 0.8);
         }
 
         .logo {
@@ -72,7 +99,7 @@
             display: flex;
             gap: 8px;
             list-style: none;
-            background: rgba(10, 25, 49, 0.8);
+            background: rgba(13, 22, 42, 0.9);
             padding: 6px;
             border-radius: 99px;
             border: 1px solid var(--card-border);
@@ -90,7 +117,7 @@
 
         .nav-links li:hover, .nav-links li.active {
             background: var(--accent-grad);
-            color: #050b18;
+            color: #030712;
             box-shadow: 0 0 25px var(--accent-glow);
             font-weight: 700;
         }
@@ -106,6 +133,7 @@
             max-width: 1200px;
             margin: 0 auto;
             width: 100%;
+            z-index: 10;
         }
 
         .page {
@@ -173,12 +201,12 @@
 
         .level-tab:hover {
             color: var(--text-main);
-            border-color: rgba(56, 189, 248, 0.3);
+            border-color: rgba(56, 189, 248, 0.4);
         }
 
         .level-tab.active {
             background: var(--accent-grad);
-            color: #050b18;
+            color: #030712;
             border-color: transparent;
             box-shadow: 0 0 20px var(--accent-glow);
         }
@@ -238,7 +266,7 @@
 
         .glass-card:hover {
             transform: translateY(-6px);
-            border-color: rgba(56, 189, 248, 0.5);
+            border-color: rgba(56, 189, 248, 0.6);
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5), 0 0 30px var(--accent-glow);
         }
 
@@ -312,6 +340,7 @@
             padding: 40px;
             backdrop-filter: blur(20px);
             box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+            position: relative;
         }
 
         .stats-row {
@@ -321,7 +350,7 @@
         }
 
         .stat-badge {
-            background: rgba(10, 25, 49, 0.8);
+            background: rgba(3, 7, 18, 0.8);
             border: 1px solid var(--card-border);
             padding: 10px 20px;
             border-radius: 14px;
@@ -336,21 +365,33 @@
 
         #text-display {
             font-family: 'JetBrains Mono', monospace;
-            font-size: 1.3rem;
+            font-size: 1.35rem;
             line-height: 2.2;
             margin-bottom: 30px;
             color: var(--text-muted);
             user-select: none;
             word-break: break-word;
+            background: rgba(3, 7, 18, 0.5);
+            padding: 24px;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        /* Active typing cursor highlight */
+        #text-display span.current {
+            border-left: 2px solid #38bdf8;
+            background: rgba(56, 189, 248, 0.15);
         }
 
         .correct { color: var(--correct); text-shadow: 0 0 10px rgba(52, 211, 153, 0.3); }
-        .incorrect { color: var(--incorrect); background: rgba(248, 113, 113, 0.15); border-radius: 4px; }
+        .incorrect { color: var(--incorrect); background: rgba(248, 113, 113, 0.2); border-radius: 4px; text-decoration: underline; }
 
         #text-input {
             width: 100%;
             height: 100px;
-            background: rgba(5, 11, 24, 0.8);
+            background: rgba(3, 7, 18, 0.85);
             border: 1px solid var(--card-border);
             color: var(--text-main);
             padding: 16px 20px;
@@ -371,7 +412,7 @@
             width: 100%;
             padding: 14px;
             background: var(--accent-grad);
-            color: #050b18;
+            color: #030712;
             border: none;
             font-weight: 800;
             font-size: 1rem;
@@ -389,6 +430,12 @@
     </style>
 </head>
 <body>
+
+    <!-- Cyber Border Decorations -->
+    <div class="border-decor-left"></div>
+    <div class="border-decor-right"></div>
+    <div class="bg-glow-orb orb-1"></div>
+    <div class="bg-glow-orb orb-2"></div>
 
     <!-- SVG Definitions for Gradient Icons -->
     <svg style="width:0;height:0;position:absolute;" aria-hidden="true">
@@ -416,25 +463,25 @@
         <section id="page-home" class="page active">
             <div class="hero">
                 <h1 class="hero-title">Tingkatkan Kecepatan & <span>Akurasi Mengetik</span></h1>
-                <p class="subtitle">Platform latihan mengetik interaktif buatan Zerry dengan sistem level (Easy, Medium, Hard) dan masing-masing 3 mode latihan spesifik.</p>
+                <p class="subtitle">Platform latihan mengetik interaktif buatan Zerry dengan tingkat kesulitan berjenjang, latar belakang neon elegan, dan indikator huruf real-time.</p>
                 <button class="btn-action" style="max-width: 220px; margin: 0 auto;" onclick="switchPage('practice')">Mulai Latihan Sekarang</button>
             </div>
 
             <!-- Penjelasan Website -->
             <div style="margin-top: 40px;">
-                <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 20px; text-align: center;">Tentang Fitur ZerryType</h3>
+                <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 20px; text-align: center;">Fitur Unggulan ZerryType</h3>
                 <div class="features-grid">
                     <div class="feature-card">
-                        <h4>Sistem Level Berjenjang</h4>
-                        <p>Pilih tingkat kesulitan dari Easy, Medium, hingga Hard dengan variasi tantangan yang disesuaikan.</p>
+                        <h4>Indikator Bacaan Dinamis</h4>
+                        <p>Kotak bacaan teks menampilkan posisi ketikan secara real-time agar kamu selalu tahu huruf mana yang sedang diketik.</p>
                     </div>
                     <div class="feature-card">
-                        <h4>Mode Tanpa Titik Koma Kapital</h4>
-                        <p>Tersedia mode teks polos huruf kecil semua tanpa tanda baca dan kapital untuk kecepatan maksimal.</p>
+                        <h4>Level & Mode Beragam</h4>
+                        <p>Tersedia level Easy, Medium, dan Hard lengkap dengan opsi mode tanpa tanda baca, kapital, hingga kode pemrograman.</p>
                     </div>
                     <div class="feature-card">
-                        <h4>Statistik Real-Time WPM</h4>
-                        <p>Pantau kecepatan kata per menit serta akurasi ketukan jari secara langsung saat latihan berlangsung.</p>
+                        <h4>Desain Estetik & Imersif</h4>
+                        <p>Dilengkapi border dekorasi sisi samping bergaya cyberpunk modern serta pencahayaan latar belakang gradient halus.</p>
                     </div>
                 </div>
             </div>
@@ -444,7 +491,7 @@
         <section id="page-practice" class="page">
             <div class="hero" style="margin-bottom: 20px;">
                 <h1 class="hero-title">Pilih Level & <span>Mode Latihan</span></h1>
-                <p class="subtitle">Pilih tingkat kesulitan terlebih dahulu, lalu pilih mode latihan yang ingin kamu mainkan.</p>
+                <p class="subtitle">Pilih tingkat kesulitan terlebih dahulu, lalu pilih mode latihan teks yang ingin kamu kuasai.</p>
             </div>
             
             <!-- Level Tabs -->
@@ -531,6 +578,7 @@
                         <div class="stat-badge">Waktu: <span id="timer">0s</span></div>
                     </div>
                     
+                    <!-- Area Bacaan Teks -->
                     <div id="text-display"></div>
                     <textarea id="text-input" placeholder="Mulai ketik teks di atas pada kotak ini..." autofocus></textarea>
                     
@@ -542,7 +590,6 @@
 
     <script>
         const dataModes = {
-            // EASY MODES
             easy_basic: [
                 "a b c d e f g h i j k l m n o p q r s t u v w x y z",
                 "1 2 3 4 5 6 7 8 9 0 a s d f g h j k l",
@@ -558,8 +605,6 @@
                 "Hari ini cuaca sangat cerah dan menyenangkan.",
                 "Belajar mengetik itu seru dan banyak manfaatnya."
             ],
-
-            // MEDIUM MODES
             medium_paragraph: [
                 "Di sebuah desa yang tenang, teknologi berkembang sangat cepat, membawa perubahan besar bagi kehidupan sehari-hari. Banyak anak muda mulai belajar pemrograman secara otodidak.",
                 "Pemrograman komputer membutuhkan ketelitian yang tinggi, karena satu kesalahan kecil bisa membuat seluruh program gagal berjalan. Seorang developer handal selalu rajin membaca dokumentasi.",
@@ -575,8 +620,6 @@
                 "Koordinat lokasi: X = 45.82, Y = -12.40. Pastikan nilai parameter tidak bernilai negatif.",
                 "Gunakan operator matematika seperti +, -, *, /, dan % untuk melakukan perhitungan data."
             ],
-
-            // HARD MODES
             hard_code: [
                 "const calculateScore = (wpm, accuracy) => { let total = wpm * (accuracy / 100); return Math.round(total); };",
                 "def process_data(user_input): if not user_input: raise ValueError('Invalid input data!'); return user_input.strip()",
@@ -661,9 +704,10 @@
             currentText = list[randomIndex];
 
             display.innerHTML = '';
-            currentText.split('').forEach(char => {
+            currentText.split('').forEach((char, index) => {
                 const span = document.createElement('span');
                 span.innerText = char;
+                if (index === 0) span.classList.add('current');
                 display.appendChild(span);
             });
         }
@@ -681,6 +725,8 @@
 
             arrayChar.forEach((charSpan, index) => {
                 const char = arrayValue[index];
+                charSpan.classList.remove('current');
+
                 if (char == null) {
                     charSpan.classList.remove('correct', 'incorrect');
                 } else if (char === charSpan.innerText) {
@@ -692,6 +738,12 @@
                     charSpan.classList.remove('correct');
                 }
             });
+
+            // Highlight current cursor position
+            const currentIndex = arrayValue.length;
+            if (currentIndex < arrayChar.length) {
+                arrayChar[currentIndex].classList.add('current');
+            }
 
             if (arrayValue.length === arrayChar.length) {
                 clearInterval(timer);
@@ -722,7 +774,7 @@
             wpmDisplay.innerText = '0';
             accDisplay.innerText = '100%';
             timerDisplay.innerText = '0s';
-            initTest();
+            initText();
             input.focus();
         }
     </script>
