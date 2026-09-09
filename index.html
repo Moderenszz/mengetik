@@ -40,7 +40,6 @@
         }
         .correct { color: #03dac6; }
         .incorrect { color: #cf6679; background-color: rgba(207, 102, 121, 0.2); text-decoration: underline; }
-        .current { text-decoration: underline; }
         
         #text-input {
             width: 100%;
@@ -96,11 +95,17 @@
         <span id="timer">Waktu: 0s</span>
     </div>
     
-    <button onclick="resetTest()">Ulangi (Reset)</button>
+    <button onclick="resetTest()">Ulangi / Ganti Paragraf</button>
 </div>
 
 <script>
-    const paragraph = "Di sebuah desa yang tenang, teknologi berkembang sangat cepat, membawa perubahan besar bagi kehidupan sehari-hari. Banyak anak muda mulai belajar pemrograman, kecerdasan buatan, hingga pengembangan game secara otodidak. Tantangan utamanya bukan lagi keter akses informasi, melainkan bagaimana menyaring hoaks dan fokus pada hal yang produktif. Oleh karena itu, konsistensi adalah kunci utama untuk menguasai skill baru.";
+    // Daftar paragraf cadangan dengan kapital, koma, dan titik
+    const paragraphs = [
+        "Di sebuah desa yang tenang, teknologi berkembang sangat cepat, membawa perubahan besar bagi kehidupan sehari-hari. Banyak anak muda mulai belajar pemrograman, kecerdasan buatan, hingga pengembangan game secara otodidak. Tantangan utamanya bukan lagi keterbatasan informasi, melainkan bagaimana menyaring hoaks dan fokus pada hal yang produktif. Oleh karena itu, konsistensi adalah kunci utama untuk menguasai skill baru.",
+        "Pemrograman komputer membutuhkan ketelitian yang tinggi, karena satu kesalahan kecil seperti titik koma yang tertinggal bisa membuat seluruh program gagal berjalan. Seorang developer yang handal tidak hanya tahu cara menulis kode, tetapi juga paham cara membaca dokumentasi dan melakukan debugging dengan efisien. Proses belajar ini memang melelahkan, namun hasil akhirnya sebanding dengan usaha yang telah dikeluarkan.",
+        "Membangun sebuah game dari nol adalah impian banyak programmer pemula. Mulai dari merancang alur cerita, mendesain antarmuka pengguna, hingga menulis skrip pergerakan karakter, semuanya memerlukan kesabaran ekstra. Diperlukan kerja sama yang baik antara logika pemrograman dan kreativitas visual agar game tersebut terasa seru saat dimainkan oleh orang lain.",
+        "Kecerdasan buatan atau artificial intelligence kini telah merambah ke berbagai sektor industri, mulai dari kesehatan, keuangan, hingga hiburan digital. Perkembangan ini membuka peluang karier yang sangat luas bagi siapa saja yang menguasai bahasa pemograman seperti Python dan JavaScript. Meskipun demikian, manusia tetap harus memegang kendali penuh agar teknologi ini membawa dampak positif bagi masa depan peradaban."
+    ];
     
     const display = document.getElementById('text-display');
     const input = document.getElementById('text-input');
@@ -111,10 +116,15 @@
     let timer = null;
     let startTime = null;
     let isStarted = false;
+    let currentParagraph = "";
 
     function initParagraph() {
+        // Ambil paragraf secara acak dari daftar di atas
+        const randomIndex = Math.floor(Math.random() * paragraphs.length);
+        currentParagraph = paragraphs[randomIndex];
+
         display.innerHTML = '';
-        paragraph.split('').forEach(char => {
+        currentParagraph.split('').forEach(char => {
             const span = document.createElement('span');
             span.innerText = char;
             display.appendChild(span);
@@ -148,7 +158,7 @@
             }
         });
 
-        // Cek jika selesai
+        // Cek jika teks sudah selesai diketik sepenuhnya
         if (arrayValue.length === arrayChar.length) {
             clearInterval(timer);
             input.disabled = true;
@@ -182,6 +192,7 @@
         input.focus();
     }
 
+    // Jalankan saat pertama kali load
     initParagraph();
 </script>
 
