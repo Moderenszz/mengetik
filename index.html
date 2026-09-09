@@ -127,7 +127,7 @@
         .hero {
             text-align: center;
             max-width: 800px;
-            margin: 0 auto 50px auto;
+            margin: 0 auto 40px auto;
         }
 
         .hero-title {
@@ -149,6 +149,49 @@
             font-size: 1.15rem;
             line-height: 1.6;
             margin-bottom: 30px;
+        }
+
+        /* Level Tabs Selection */
+        .level-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 30px;
+        }
+
+        .level-tab {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            color: var(--text-muted);
+            padding: 10px 24px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .level-tab:hover {
+            color: var(--text-main);
+            border-color: rgba(56, 189, 248, 0.3);
+        }
+
+        .level-tab.active {
+            background: var(--accent-grad);
+            color: #050b18;
+            border-color: transparent;
+            box-shadow: 0 0 20px var(--accent-glow);
+        }
+
+        .level-container {
+            display: none;
+        }
+
+        .level-container.active {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 24px;
+            animation: fadeIn 0.3s ease;
         }
 
         /* Features Intro Grid */
@@ -180,14 +223,7 @@
             line-height: 1.5;
         }
 
-        /* Grid Cards for Selection */
-        .grid-cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 24px;
-            margin-top: 10px;
-        }
-
+        /* Glass Cards for Selection */
         .glass-card {
             background: var(--card-bg);
             border: 1px solid var(--card-border);
@@ -380,7 +416,7 @@
         <section id="page-home" class="page active">
             <div class="hero">
                 <h1 class="hero-title">Tingkatkan Kecepatan & <span>Akurasi Mengetik</span></h1>
-                <p class="subtitle">Platform latihan mengetik interaktif buatan Zerry dengan antarmuka modern bernuansa gradient putih biru. Dirancang khusus untuk menguji kecepatan jari dari level pemula hingga mahir.</p>
+                <p class="subtitle">Platform latihan mengetik interaktif buatan Zerry dengan sistem level (Easy, Medium, Hard) dan masing-masing 3 mode latihan spesifik.</p>
                 <button class="btn-action" style="max-width: 220px; margin: 0 auto;" onclick="switchPage('practice')">Mulai Latihan Sekarang</button>
             </div>
 
@@ -389,16 +425,16 @@
                 <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 20px; text-align: center;">Tentang Fitur ZerryType</h3>
                 <div class="features-grid">
                     <div class="feature-card">
-                        <h4>Real-Time WPM & Akurasi</h4>
-                        <p>Sistem otomatis menghitung kecepatan kata per menit (WPM) dan persentase akurasi ketukan secara akurat.</p>
+                        <h4>Sistem Level Berjenjang</h4>
+                        <p>Pilih tingkat kesulitan dari Easy, Medium, hingga Hard dengan variasi tantangan yang disesuaikan.</p>
                     </div>
                     <div class="feature-card">
-                        <h4>Pilihan Mode Beragam</h4>
-                        <p>Tersedia mode paragraf formal lengkap dengan tanda baca, kode pemrograman, hingga mode teks polos tanpa kapital dan titik koma.</p>
+                        <h4>Mode Tanpa Titik Koma Kapital</h4>
+                        <p>Tersedia mode teks polos huruf kecil semua tanpa tanda baca dan kapital untuk kecepatan maksimal.</p>
                     </div>
                     <div class="feature-card">
-                        <h4>Desain Modern & Elegan</h4>
-                        <p>Mengusung konsep estetika gelap berpadu gradasi putih-biru neon dengan ikon vektor modern tanpa emoji.</p>
+                        <h4>Statistik Real-Time WPM</h4>
+                        <p>Pantau kecepatan kata per menit serta akurasi ketukan jari secara langsung saat latihan berlangsung.</p>
                     </div>
                 </div>
             </div>
@@ -406,42 +442,72 @@
 
         <!-- Practice Menu Page -->
         <section id="page-practice" class="page">
-            <div class="hero" style="margin-bottom: 30px;">
-                <h1 class="hero-title">Pilih Mode <span>Latihan</span></h1>
-                <p class="subtitle">Pilih kategori latihan di bawah ini sesuai dengan gaya mengetik yang ingin kamu kuasai.</p>
+            <div class="hero" style="margin-bottom: 20px;">
+                <h1 class="hero-title">Pilih Level & <span>Mode Latihan</span></h1>
+                <p class="subtitle">Pilih tingkat kesulitan terlebih dahulu, lalu pilih mode latihan yang ingin kamu mainkan.</p>
             </div>
             
-            <div class="grid-cards">
-                <div class="glass-card" onclick="startMode('paragraph')">
-                    <div class="card-icon-wrap">
-                        <svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16m-7 6h7"/></svg>
-                    </div>
-                    <h3>Paragraf Lengkap</h3>
-                    <p>Teks bermakna dengan tata bahasa lengkap (huruf kapital, koma, titik).</p>
-                </div>
+            <!-- Level Tabs -->
+            <div class="level-tabs">
+                <button class="level-tab active" onclick="switchLevel('easy')">Easy</button>
+                <button class="level-tab" onclick="switchLevel('medium')">Medium</button>
+                <button class="level-tab" onclick="switchLevel('hard')">Hard</button>
+            </div>
 
-                <div class="glass-card" onclick="startMode('nopunctuation')">
-                    <div class="card-icon-wrap">
-                        <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                    </div>
-                    <h3>Tanpa Titik, Koma & Kapital</h3>
-                    <p>Latihan murni huruf kecil semua tanpa tanda baca untuk kecepatan maksimal.</p>
-                </div>
-
-                <div class="glass-card" onclick="startMode('symbols')">
-                    <div class="card-icon-wrap">
-                        <svg viewBox="0 0 24 24"><path d="M16 18l6-6-6-6M8 6l-6 6 6 6"/></svg>
-                    </div>
-                    <h3>Kode & Simbol</h3>
-                    <p>Melatih jari pada kurung kurawa, operator logika, titik koma, dan angka.</p>
-                </div>
-
-                <div class="glass-card" onclick="startMode('basic')">
-                    <div class="card-icon-wrap">
-                        <svg viewBox="0 0 24 24"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
-                    </div>
+            <!-- LEVEL EASY -->
+            <div id="level-easy" class="level-container active">
+                <div class="glass-card" onclick="startMode('easy_basic')">
+                    <div class="card-icon-wrap"><svg viewBox="0 0 24 24"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></div>
                     <h3>Huruf & Angka Dasar</h3>
-                    <p>Pengenalan kombinasi alfabet dasar dan angka untuk membangun fondasi memori otot.</p>
+                    <p>Kombinasi alfabet dasar dan angka sederhana untuk pemula.</p>
+                </div>
+                <div class="glass-card" onclick="startMode('easy_nopunct')">
+                    <div class="card-icon-wrap"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+                    <h3>Tanpa Titik, Koma & Kapital</h3>
+                    <p>Teks polos huruf kecil semua tanpa tanda baca sama sekali.</p>
+                </div>
+                <div class="glass-card" onclick="startMode('easy_short')">
+                    <div class="card-icon-wrap"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h10"/></svg></div>
+                    <h3>Kalimat Pendek</h3>
+                    <p>Latihan kalimat pendek sehari-hari yang santai dan mudah.</p>
+                </div>
+            </div>
+
+            <!-- LEVEL MEDIUM -->
+            <div id="level-medium" class="level-container">
+                <div class="glass-card" onclick="startMode('medium_paragraph')">
+                    <div class="card-icon-wrap"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16m-7 6h7"/></svg></div>
+                    <h3>Paragraf Standar</h3>
+                    <p>Teks bermakna dengan struktur tata bahasa dan tanda baca umum.</p>
+                </div>
+                <div class="glass-card" onclick="startMode('medium_nopunct')">
+                    <div class="card-icon-wrap"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+                    <h3>Teks Polos Menengah (Tanpa Kapital/Simbol)</h3>
+                    <p>Melatih kecepatan jari dengan alur kalimat sedang tanpa huruf besar.</p>
+                </div>
+                <div class="glass-card" onclick="startMode('medium_symbols')">
+                    <div class="card-icon-wrap"><svg viewBox="0 0 24 24"><path d="M16 18l6-6-6-6M8 6l-6 6 6 6"/></svg></div>
+                    <h3>Simbol & Angka</h3>
+                    <p>Pengenalan karakter khusus seperti tanda kurung, strip, dan angka.</p>
+                </div>
+            </div>
+
+            <!-- LEVEL HARD -->
+            <div id="level-hard" class="level-container">
+                <div class="glass-card" onclick="startMode('hard_code')">
+                    <div class="card-icon-wrap"><svg viewBox="0 0 24 24"><path d="M16 18l6-6-6-6M8 6l-6 6 6 6"/></svg></div>
+                    <h3>Kode Pemrograman Kompleks</h3>
+                    <p>Baris kode sintaks JavaScript/Python lengkap dengan titik koma & kurung kurawa.</p>
+                </div>
+                <div class="glass-card" onclick="startMode('hard_nopunct')">
+                    <div class="card-icon-wrap"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+                    <h3>Kecepatan Ekstrem (Tanpa Simbol/Kapital)</h3>
+                    <p>Teks panjang rapat tanpa jeda huruf besar dan tanda baca untuk kecepatan tinggi.</p>
+                </div>
+                <div class="glass-card" onclick="startMode('hard_complex')">
+                    <div class="card-icon-wrap"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/></svg></div>
+                    <h3>Artikel Teknis & Istilah Asing</h3>
+                    <p>Kosa kata tingkat lanjut, istilah sains, dan struktur kalimat yang rumit.</p>
                 </div>
             </div>
         </section>
@@ -476,29 +542,59 @@
 
     <script>
         const dataModes = {
-            paragraph: [
-                "Di sebuah desa yang tenang, teknologi berkembang sangat cepat, membawa perubahan besar bagi kehidupan sehari-hari. Banyak anak muda mulai belajar pemrograman, kecerdasan buatan, hingga pengembangan game secara otodidak.",
-                "Pemrograman komputer membutuhkan ketelitian yang tinggi, karena satu kesalahan kecil seperti titik koma yang tertinggal bisa membuat seluruh program gagal berjalan. Seorang developer handal selalu rajin membaca dokumentasi.",
-                "Membangun sebuah game dari nol adalah impian banyak programmer pemula. Mulai dari merancang alur cerita, mendesain antarmuka, hingga menulis skrip pergerakan karakter, semuanya memerlukan kesabaran ekstra."
+            // EASY MODES
+            easy_basic: [
+                "a b c d e f g h i j k l m n o p q r s t u v w x y z",
+                "1 2 3 4 5 6 7 8 9 0 a s d f g h j k l",
+                "latihan dasar mengetik huruf dan angka dengan santai"
             ],
-            nopunctuation: [
-                "di sebuah desa yang tenang teknologi berkembang sangat cepat membawa perubahan besar bagi kehidupan sehari hari banyak anak muda mulai belajar pemrograman kecerdasan buatan hingga pengembangan game secara otodidak",
-                "pemrograman komputer membutuhkan ketelitian yang tinggi karena satu kesalahan kecil bisa membuat seluruh program gagal berjalan seorang developer handal selalu rajin membaca dokumentasi dan menguji kode buatannya",
-                "membangun sebuah game dari nol adalah impian banyak programmer pemula mulai dari merancang alur cerita mendesain antarmuka hingga menulis skrip pergerakan karakter semuanya memerlukan kesabaran ekstra"
+            easy_nopunct: [
+                "belajar mengetik dengan santai tanpa menggunakan huruf besar atau tanda baca sama sekali",
+                "semua huruf ditulis menggunakan huruf kecil agar lebih mudah melatih kelenturan jari",
+                "ayo berlatih setiap hari agar kecepatan mengetik jari tangan semakin meningkat"
             ],
-            symbols: [
-                "const x = 100; let y = 200; if (x !== y) { console.log('Hello, World!'); } // Cek logika dasar pemrograman.",
-                "Email: support@zerrytype.dev | Status: Active (v2.1.4). Pastikan token akses API sudah dikonfigurasi dengan benar!",
-                "Fungsi matematika: f(x) = 3x^2 + 5x - 12. Gunakan modul kalkulus untuk menyelesaikannya secara akurat!"
+            easy_short: [
+                "Halo semua, mari kita belajar bersama.",
+                "Hari ini cuaca sangat cerah dan menyenangkan.",
+                "Belajar mengetik itu seru dan banyak manfaatnya."
             ],
-            basic: [
-                "a b c d e f g h i j k l m n o p q r s t u v w x y z 1 2 3 4 5 6 7 8 9 0",
-                "ketik huruf kapital dan huruf kecil secara bergantian dengan teliti dan konsisten setiap hari",
-                "latihan dasar memperkuat memori otot pada jari tangan kiri dan kanan secara merata tanpa henti"
+
+            // MEDIUM MODES
+            medium_paragraph: [
+                "Di sebuah desa yang tenang, teknologi berkembang sangat cepat, membawa perubahan besar bagi kehidupan sehari-hari. Banyak anak muda mulai belajar pemrograman secara otodidak.",
+                "Pemrograman komputer membutuhkan ketelitian yang tinggi, karena satu kesalahan kecil bisa membuat seluruh program gagal berjalan. Seorang developer handal selalu rajin membaca dokumentasi.",
+                "Membangun sebuah game dari nol adalah impian banyak programmer pemula. Mulai dari merancang alur cerita hingga menulis skrip pergerakan karakter, semuanya memerlukan kesabaran."
+            ],
+            medium_nopunct: [
+                "di sebuah desa yang tenang teknologi berkembang sangat cepat membawa perubahan besar bagi kehidupan sehari hari banyak anak muda mulai belajar pemrograman",
+                "pemrograman komputer membutuhkan ketelitian yang tinggi karena satu kesalahan kecil bisa membuat seluruh program gagal berjalan dengan lancar",
+                "membangun sebuah game dari nol adalah impian banyak programmer pemula mulai dari merancang alur cerita hingga menulis skrip pergerakan karakter"
+            ],
+            medium_symbols: [
+                "Total harga: Rp 150.000 (Diskon 20% untuk member baru). Hubungi admin di support@zerry.dev!",
+                "Koordinat lokasi: X = 45.82, Y = -12.40. Pastikan nilai parameter tidak bernilai negatif.",
+                "Gunakan operator matematika seperti +, -, *, /, dan % untuk melakukan perhitungan data."
+            ],
+
+            // HARD MODES
+            hard_code: [
+                "const calculateScore = (wpm, accuracy) => { let total = wpm * (accuracy / 100); return Math.round(total); };",
+                "def process_data(user_input): if not user_input: raise ValueError('Invalid input data!'); return user_input.strip()",
+                "document.getElementById('text-input').addEventListener('input', (e) => { console.log(e.target.value); });"
+            ],
+            hard_nopunct: [
+                "implementasi algoritma kecerdasan buatan pada pengembangan sistem permainan memerlukan optimasi memori yang sangat ketat agar performa server tetap stabil dan tidak mengalami lag saat diakses banyak pemain secara bersamaan",
+                "arsitektur jaringan komputer modern menuntut pemahaman mendalam mengenai protokol komunikasi basis data keamanan siber serta manajemen server cloud yang handal untuk mengantisipasi berbagai potensi serangan siber",
+                "pengembangan perangkat lunak berskala besar melibatkan koordinasi tim pengembang pengujian otomatis integrasi berkelanjutan serta pemeliharaan kode sumber secara berkala demi menjaga kualitas produk akhir"
+            ],
+            hard_complex: [
+                "Implementasi kecerdasan buatan (Artificial Intelligence) dalam ekosistem pengembangan game modern menuntut optimasi komputasi yang sangat presisi.",
+                "Struktur data berdimensi tinggi dan algoritma pathfinding seperti A* sangat esensial untuk mengatur pergerakan NPC secara real-time.",
+                "Sinkronisasi antara sisi client dan server pada arsitektur multiplayer memastikan konsistensi data player tanpa mengalami delay yang berarti."
             ]
         };
 
-        let currentMode = 'paragraph';
+        let currentMode = 'easy_basic';
         let currentText = "";
         let timer = null;
         let startTime = null;
@@ -519,13 +615,34 @@
             }
         }
 
+        function switchLevel(level) {
+            document.querySelectorAll('.level-tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.level-container').forEach(c => c.classList.remove('active'));
+
+            if (level === 'easy') {
+                document.querySelectorAll('.level-tab')[0].classList.add('active');
+                document.getElementById('level-easy').classList.add('active');
+            } else if (level === 'medium') {
+                document.querySelectorAll('.level-tab')[1].classList.add('active');
+                document.getElementById('level-medium').classList.add('active');
+            } else if (level === 'hard') {
+                document.querySelectorAll('.level-tab')[2].classList.add('active');
+                document.getElementById('level-hard').classList.add('active');
+            }
+        }
+
         function startMode(mode) {
             currentMode = mode;
             let titles = {
-                paragraph: "Mode: Paragraf Lengkap",
-                nopunctuation: "Mode: Tanpa Titik, Koma & Kapital",
-                symbols: "Mode: Kode & Simbol",
-                basic: "Mode: Huruf & Angka Dasar"
+                easy_basic: "Easy: Huruf & Angka Dasar",
+                easy_nopunct: "Easy: Tanpa Titik, Koma & Kapital",
+                easy_short: "Easy: Kalimat Pendek",
+                medium_paragraph: "Medium: Paragraf Standar",
+                medium_nopunct: "Medium: Teks Polos Menengah",
+                medium_symbols: "Medium: Simbol & Angka",
+                hard_code: "Hard: Kode Pemrograman Kompleks",
+                hard_nopunct: "Hard: Kecepatan Ekstrem (Tanpa Simbol)",
+                hard_complex: "Hard: Artikel Teknis & Istilah Asing"
             };
             document.getElementById('arena-title').innerText = titles[mode];
             switchPage('arena');
@@ -605,7 +722,7 @@
             wpmDisplay.innerText = '0';
             accDisplay.innerText = '100%';
             timerDisplay.innerText = '0s';
-            initText();
+            initTest();
             input.focus();
         }
     </script>
