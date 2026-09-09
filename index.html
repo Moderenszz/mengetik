@@ -3,99 +3,104 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TypeDash - Platform Latihan Mengetik Modern</title>
+    <title>TypeNexus — Platform Latihan Mengetik Modern</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-main: #0f1016;
-            --bg-sidebar: #161821;
-            --bg-card: #1c1f2b;
-            --accent: #6366f1;
-            --accent-hover: #4f46e5;
-            --text-main: #f3f4f6;
-            --text-muted: #9ca3af;
-            --correct: #10b981;
-            --incorrect: #ef4444;
-            --border: #2a2e3d;
+            --bg-deep: #030712;
+            --bg-gradient: radial-gradient(circle at top right, #1e1b4b, #0f172a, #030712);
+            --card-bg: rgba(30, 41, 59, 0.4);
+            --card-border: rgba(255, 255, 255, 0.08);
+            --accent-grad: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+            --accent-glow: rgba(59, 130, 246, 0.3);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --correct: #34d399;
+            --incorrect: #f87171;
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            font-family: 'Plus Jakarta Sans', sans-serif;
         }
 
         body {
-            background-color: var(--bg-main);
+            background: var(--bg-deep);
+            background-image: var(--bg-gradient);
             color: var(--text-main);
-            display: flex;
-            height: 100vh;
-            overflow: hidden;
-        }
-
-        /* Sidebar Modern */
-        sidebar {
-            width: 240px;
-            background-color: var(--bg-sidebar);
-            border-right: 1px solid var(--border);
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
-            padding: 24px 16px;
+            overflow-x: hidden;
+        }
+
+        /* Top Navbar Modern */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 24px 48px;
+            border-bottom: 1px solid var(--card-border);
+            backdrop-filter: blur(12px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
 
         .logo {
-            font-size: 1.25rem;
+            font-size: 1.4rem;
             font-weight: 800;
-            color: var(--text-main);
-            margin-bottom: 32px;
+            background: var(--accent-grad);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
             display: flex;
             align-items: center;
-            gap: 10px;
-        }
-
-        .logo span {
-            color: var(--accent);
+            gap: 8px;
+            cursor: pointer;
         }
 
         .nav-links {
-            list-style: none;
             display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-
-        .nav-links li a {
-            display: flex;
-            align-items: center;
             gap: 12px;
-            padding: 12px 16px;
+            list-style: none;
+            background: rgba(15, 23, 42, 0.6);
+            padding: 6px;
+            border-radius: 99px;
+            border: 1px solid var(--card-border);
+        }
+
+        .nav-links li {
+            padding: 8px 20px;
+            border-radius: 99px;
+            font-size: 0.9rem;
+            font-weight: 600;
             color: var(--text-muted);
-            text-decoration: none;
-            border-radius: 8px;
-            font-weight: 500;
-            transition: all 0.2s ease;
+            cursor: pointer;
+            transition: all 0.3s ease;
         }
 
-        .nav-links li a:hover, .nav-links li.active a {
-            background-color: var(--accent);
+        .nav-links li:hover, .nav-links li.active {
+            background: var(--accent-grad);
             color: white;
+            box-shadow: 0 0 20px var(--accent-glow);
         }
 
-        /* Main Content Area */
+        /* Main Wrapper */
         main {
             flex: 1;
             display: flex;
-            flex-direction: column;
-            overflow-y: auto;
-            padding: 40px;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
         }
 
         .page {
             display: none;
-            animation: fadeIn 0.3s ease-in-out;
-            max-width: 900px;
-            margin: 0 auto;
             width: 100%;
+            max-width: 900px;
+            animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .page.active {
@@ -103,207 +108,267 @@
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(6px); }
+            from { opacity: 0; transform: translateY(12px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        h1 {
-            font-size: 2rem;
+        /* Home & Practice Grid UI */
+        .hero-title {
+            font-size: 2.8rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 12px;
+            letter-spacing: -0.02em;
+        }
+
+        .hero-title span {
+            background: var(--accent-grad);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            margin-bottom: 40px;
+        }
+
+        .grid-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+        }
+
+        .glass-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 20px;
+            padding: 32px;
+            backdrop-filter: blur(16px);
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--accent-grad);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 0;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(59, 130, 246, 0.4);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4), 0 0 25px var(--accent-glow);
+        }
+
+        .glass-card h3, .glass-card p, .glass-card .card-icon {
+            position: relative;
+            z-index: 1;
+        }
+
+        .card-icon {
+            font-size: 2.2rem;
+            margin-bottom: 16px;
+        }
+
+        .glass-card h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
             margin-bottom: 8px;
         }
 
-        p.subtitle {
+        .glass-card p {
             color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        /* Arena Typing UI */
+        .arena-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             margin-bottom: 24px;
         }
 
-        /* Cards & Grid */
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 20px;
-            margin-top: 20px;
-        }
-
-        .card {
-            background-color: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 24px;
-            cursor: pointer;
-            transition: transform 0.2s, border-color 0.2s;
-        }
-
-        .card:hover {
-            transform: translateY(-4px);
-            border-color: var(--accent);
-        }
-
-        .card h3 {
-            margin-bottom: 8px;
-            color: var(--text-main);
-        }
-
-        .card p {
+        .back-btn {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
             color: var(--text-muted);
-            font-size: 0.9rem;
+            padding: 8px 16px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: 0.2s;
+        }
+        .back-btn:hover { color: white; background: rgba(255,255,255,0.08); }
+
+        .typing-box {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 24px;
+            padding: 40px;
+            backdrop-filter: blur(20px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
         }
 
-        /* Typing Test Box UI */
-        .typing-container {
-            background-color: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 30px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-        }
-
-        .stats-bar {
+        .stats-row {
             display: flex;
-            gap: 30px;
-            margin-bottom: 20px;
-            font-size: 1.1rem;
-            font-weight: bold;
-            color: var(--accent);
+            gap: 24px;
+            margin-bottom: 30px;
+        }
+
+        .stat-badge {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid var(--card-border);
+            padding: 10px 20px;
+            border-radius: 14px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #60a5fa;
+            display: flex;
+            gap: 8px;
+            align-items: center;
         }
 
         #text-display {
-            font-size: 1.35rem;
-            line-height: 2;
-            margin-bottom: 24px;
-            letter-spacing: 0.5px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.3rem;
+            line-height: 2.2;
+            margin-bottom: 30px;
             color: var(--text-muted);
             user-select: none;
             word-break: break-word;
         }
 
-        .correct { color: var(--correct); }
-        .incorrect { color: var(--incorrect); background-color: rgba(239, 68, 68, 0.15); border-radius: 2px; }
+        .correct { color: var(--correct); text-shadow: 0 0 10px rgba(52, 211, 153, 0.3); }
+        .incorrect { color: var(--incorrect); background: rgba(248, 113, 113, 0.15); border-radius: 4px; }
 
         #text-input {
             width: 100%;
-            height: 90px;
-            background-color: var(--bg-main);
-            border: 1px solid var(--border);
+            height: 100px;
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid var(--card-border);
             color: var(--text-main);
-            padding: 16px;
+            padding: 16px 20px;
             font-size: 1.1rem;
-            border-radius: 10px;
+            border-radius: 16px;
             resize: none;
-            box-sizing: border-box;
-            transition: border-color 0.2s;
+            outline: none;
+            transition: all 0.3s ease;
         }
 
         #text-input:focus {
-            outline: none;
-            border-color: var(--accent);
+            border-color: #3b82f6;
+            box-shadow: 0 0 20px var(--accent-glow);
         }
 
         .btn-action {
-            margin-top: 20px;
-            padding: 12px 24px;
-            background-color: var(--accent);
+            margin-top: 24px;
+            width: 100%;
+            padding: 14px;
+            background: var(--accent-grad);
             color: white;
             border: none;
-            font-weight: 600;
+            font-weight: 700;
             font-size: 1rem;
-            border-radius: 8px;
+            border-radius: 14px;
             cursor: pointer;
-            transition: background-color 0.2s;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px var(--accent-glow);
         }
 
         .btn-action:hover {
-            background-color: var(--accent-hover);
+            opacity: 0.9;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px var(--accent-glow);
         }
-
-        .back-btn {
-            background: none;
-            border: none;
-            color: var(--text-muted);
-            cursor: pointer;
-            font-size: 0.95rem;
-            margin-bottom: 16px;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-        }
-        .back-btn:hover { color: var(--text-main); }
     </style>
 </head>
 <body>
 
-    <!-- Sidebar -->
-    <sidebar>
-        <div class="logo">⚡ Type<span>Dash</span></div>
+    <!-- Header / Navbar -->
+    <header>
+        <div class="logo" onclick="switchPage('home')">
+            ⚡ Type<span>Nexus</span>
+        </div>
         <ul class="nav-links">
-            <li class="active" id="nav-home" onclick="switchPage('home')">
-                <a href="#">🏠 Home</a>
-            </li>
-            <li id="nav-practice" onclick="switchPage('practice')">
-                <a href="#">⌨️ Latihan</a>
-            </li>
+            <li id="nav-home" class="active" onclick="switchPage('home')">Home</li>
+            <li id="nav-practice" onclick="switchPage('practice')">Latihan</li>
         </ul>
-    </sidebar>
+    </header>
 
-    <!-- Main Section -->
+    <!-- Content Area -->
     <main>
-        <!-- Page: Home -->
+        <!-- Home Page -->
         <section id="page-home" class="page active">
-            <h1>Selamat Datang, Bro!</h1>
-            <p class="subtitle">Tingkatkan kecepatan mengetik, akurasi, dan refleks jari kamu secara interaktif.</p>
+            <h1 class="hero-title">Kuasai Kecepatan Ketik <span>Tanpa Batas.</span></h1>
+            <p class="subtitle">Platform latihan mengetik modern dengan antarmuka futuristik, akurasi real-time, dan ragam mode menarik.</p>
             
-            <div class="grid">
-                <div class="card" onclick="startMode('paragraph')">
-                    <h3>📄 Paragraf Cepat</h3>
-                    <p>Latihan mengetik paragraf utuh lengkap dengan huruf kapital, koma, dan titik.</p>
+            <div class="grid-cards">
+                <div class="glass-card" onclick="startMode('paragraph')">
+                    <div class="card-icon">📄</div>
+                    <h3>Paragraf Panjang Cepat</h3>
+                    <p>Latihan teks bermakna lengkap dengan huruf kapital, koma, dan titik standar penulisan.</p>
                 </div>
-                <div class="card" onclick="startMode('symbols')">
-                    <h3>🔣 Kenal Huruf & Simbol</h3>
-                    <p>Fokus melatih kelenturan jari pada kombinasi tanda baca, angka, dan huruf kapital.</p>
+                <div class="glass-card" onclick="startMode('symbols')">
+                    <div class="card-icon">💻</div>
+                    <h3>Simbol & Kode Pemrograman</h3>
+                    <p>Fokus melatih kelenturan jari pada tanda kurung, titik koma, operator matematika, dan angka.</p>
                 </div>
             </div>
         </section>
 
-        <!-- Page: Menu Latihan (Pilihan Mode) -->
+        <!-- Practice Menu Page -->
         <section id="page-practice" class="page">
-            <h1>Pilih Mode Latihan</h1>
-            <p class="subtitle">Pilih skenario latihan sesuai kebutuhanmu hari ini.</p>
+            <h1 class="hero-title">Pilih Mode <span>Latihan</span></h1>
+            <p class="subtitle">Tentukan skenario latihan sesuai target peningkatan kemampuan jarimu.</p>
             
-            <div class="grid">
-                <div class="card" onclick="startMode('paragraph')">
-                    <h3>📄 Mengetik Paragraf Panjang</h3>
-                    <p>Teks bermakna dengan tata bahasa lengkap (kapital, koma, titik).</p>
+            <div class="grid-cards">
+                <div class="glass-card" onclick="startMode('paragraph')">
+                    <div class="card-icon">✍️</div>
+                    <h3>Mengetik Paragraf Kalimat</h3>
+                    <p>Uji ketangkasan mengetik paragraf bahasa Indonesia secara natural dan lancar.</p>
                 </div>
-                <div class="card" onclick="startMode('symbols')">
-                    <h3>🔣 Latihan Simbol & Kapital</h3>
-                    <p>Membiasakan jari mengetik tanda baca khusus dan huruf besar secara cepat.</p>
+                <div class="glass-card" onclick="startMode('symbols')">
+                    <div class="card-icon">⚡</div>
+                    <h3>Kombinasi Simbol & Kapital</h3>
+                    <p>Membiasakan jari mengetik simbol khusus, angka, dan huruf kapital layaknya developer profesional.</p>
                 </div>
             </div>
         </section>
 
-        <!-- Page: Arena Mengetik -->
+        <!-- Typing Arena Page -->
         <section id="page-arena" class="page">
-            <button class="back-btn" onclick="switchPage('practice')">← Kembali ke Menu</button>
-            <h1 id="arena-title">Latihan Mengetik</h1>
-            <p class="subtitle" id="arena-desc">Ketik teks di bawah ini seakurat dan secepat mungkin.</p>
+            <div class="arena-header">
+                <button class="back-btn" onclick="switchPage('practice')">← Kembali</button>
+                <h3 id="arena-title" style="font-weight: 700; color: #60a5fa;">Mode Latihan</h3>
+                <div></div>
+            </div>
 
-            <div class="typing-container">
-                <div class="stats-bar">
-                    <span id="wpm">WPM: 0</span>
-                    <span id="accuracy">Akurasi: 100%</span>
-                    <span id="timer">Waktu: 0s</span>
+            <div class="typing-box">
+                <div class="stats-row">
+                    <div class="stat-badge">🚀 <span id="wpm">WPM: 0</span></div>
+                    <div class="stat-badge">🎯 <span id="accuracy">Akurasi: 100%</span></div>
+                    <div class="stat-badge">⏱️ <span id="timer">Waktu: 0s</span></div>
                 </div>
                 
                 <div id="text-display"></div>
-                <textarea id="text-input" placeholder="Mulai ketik di sini..." autofocus></textarea>
+                <textarea id="text-input" placeholder="Mulai ketik teks di atas pada kotak ini..." autofocus></textarea>
                 
-                <button class="btn-action" onclick="resetTest()">Ulangi / Ganti Teks</button>
+                <button class="btn-action" onclick="resetTest()">Ulangi / Ganti Teks Otomatis</button>
             </div>
         </section>
     </main>
 
     <script>
-        // Database Teks Latihan
         const dataModes = {
             paragraph: [
                 "Di sebuah desa yang tenang, teknologi berkembang sangat cepat, membawa perubahan besar bagi kehidupan sehari-hari. Banyak anak muda mulai belajar pemrograman, kecerdasan buatan, hingga pengembangan game secara otodidak.",
@@ -312,8 +377,8 @@
             ],
             symbols: [
                 "const x = 100; let y = 200; if (x !== y) { console.log('Hello, World!'); } // Cek logika dasar pemrograman.",
-                "Email: support@typedash.dev | Status: Active (v2.1.4). Pastikan token akses API sudah dikonfigurasi dengan benar!",
-                "Fungsi matematika: f(x) = 3x^2 + 5x - 12. Gunakan modul SymPy atau pustaka kalkulus untuk menyelesaikannya!"
+                "Email: support@typenexus.dev | Status: Active (v2.1.4). Pastikan token akses API sudah dikonfigurasi dengan benar!",
+                "Fungsi matematika: f(x) = 3x^2 + 5x - 12. Gunakan modul kalkulus untuk menyelesaikannya secara akurat!"
             ]
         };
 
@@ -323,7 +388,6 @@
         let startTime = null;
         let isStarted = false;
 
-        // Navigasi SPA
         function switchPage(pageId) {
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
             document.querySelectorAll('.nav-links li').forEach(li => li.classList.remove('active'));
@@ -339,16 +403,9 @@
             }
         }
 
-        // Mulai Mode Latihan Tertentu
         function startMode(mode) {
             currentMode = mode;
-            if (mode === 'paragraph') {
-                document.getElementById('arena-title').innerText = "Mengetik Paragraf Panjang";
-                document.getElementById('arena-desc').innerText = "Latihan paragraf lengkap dengan huruf kapital dan tanda baca.";
-            } else {
-                document.getElementById('arena-title').innerText = "Kenal Huruf & Simbol";
-                document.getElementById('arena-desc').innerText = "Latihan khusus teks kode, angka, dan simbol tanda baca.";
-            }
+            document.getElementById('arena-title').innerText = mode === 'paragraph' ? "Mode: Paragraf Panjang" : "Mode: Simbol & Kode";
             switchPage('arena');
             resetTest();
         }
