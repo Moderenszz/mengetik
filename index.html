@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TypeNexus — Platform Latihan Mengetik Modern</title>
+    <title>ZerryType — Platform Latihan Mengetik Modern</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -183,7 +183,7 @@
         /* Grid Cards for Selection */
         .grid-cards {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
             gap: 24px;
             margin-top: 10px;
         }
@@ -192,7 +192,7 @@
             background: var(--card-bg);
             border: 1px solid var(--card-border);
             border-radius: 20px;
-            padding: 32px;
+            padding: 28px;
             backdrop-filter: blur(16px);
             cursor: pointer;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -227,7 +227,7 @@
         }
 
         .glass-card h3 {
-            font-size: 1.25rem;
+            font-size: 1.15rem;
             font-weight: 700;
             margin-bottom: 8px;
             color: #f8fafc;
@@ -235,7 +235,7 @@
 
         .glass-card p {
             color: var(--text-muted);
-            font-size: 0.95rem;
+            font-size: 0.88rem;
             line-height: 1.5;
         }
 
@@ -366,7 +366,7 @@
     <header>
         <div class="logo" onclick="switchPage('home')">
             <svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-            TypeNexus
+            ZerryType
         </div>
         <ul class="nav-links">
             <li id="nav-home" class="active" onclick="switchPage('home')">Home</li>
@@ -380,25 +380,25 @@
         <section id="page-home" class="page active">
             <div class="hero">
                 <h1 class="hero-title">Tingkatkan Kecepatan & <span>Akurasi Mengetik</span></h1>
-                <p class="subtitle">Platform latihan mengetik interaktif dengan antarmuka modern bernuansa gradient putih biru. Dirancang khusus untuk melatih kelenturan jari, pemahaman tanda baca, hingga kode pemrograman.</p>
+                <p class="subtitle">Platform latihan mengetik interaktif buatan Zerry dengan antarmuka modern bernuansa gradient putih biru. Dirancang khusus untuk menguji kecepatan jari dari level pemula hingga mahir.</p>
                 <button class="btn-action" style="max-width: 220px; margin: 0 auto;" onclick="switchPage('practice')">Mulai Latihan Sekarang</button>
             </div>
 
             <!-- Penjelasan Website -->
             <div style="margin-top: 40px;">
-                <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 20px; text-align: center;">Tentang Fitur Platform Ini</h3>
+                <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 20px; text-align: center;">Tentang Fitur ZerryType</h3>
                 <div class="features-grid">
                     <div class="feature-card">
                         <h4>Real-Time WPM & Akurasi</h4>
-                        <p>Sistem menghitung kecepatan kata per menit (WPM) secara langsung beserta persentase kesalahan ketik secara presisi.</p>
+                        <p>Sistem otomatis menghitung kecepatan kata per menit (WPM) dan persentase akurasi ketukan secara akurat.</p>
                     </div>
                     <div class="feature-card">
-                        <h4>Ragam Mode Latihan</h4>
-                        <p>Tersedia pilihan mode mulai dari paragraf panjang bermakna, kode pemrograman, hingga kombinasi simbol & angka.</p>
+                        <h4>Pilihan Mode Beragam</h4>
+                        <p>Tersedia mode paragraf formal lengkap dengan tanda baca, kode pemrograman, hingga mode teks polos tanpa kapital dan titik koma.</p>
                     </div>
                     <div class="feature-card">
-                        <h4>Desain Modern & Responsif</h4>
-                        <p>Antarmuka berstandar tinggi dengan efek kaca (glassmorphism) dan gradasi warna yang nyaman di mata.</p>
+                        <h4>Desain Modern & Elegan</h4>
+                        <p>Mengusung konsep estetika gelap berpadu gradasi putih-biru neon dengan ikon vektor modern tanpa emoji.</p>
                     </div>
                 </div>
             </div>
@@ -408,7 +408,7 @@
         <section id="page-practice" class="page">
             <div class="hero" style="margin-bottom: 30px;">
                 <h1 class="hero-title">Pilih Mode <span>Latihan</span></h1>
-                <p class="subtitle">Pilih kategori latihan di bawah ini sesuai dengan target peningkatan keahlian jarimu.</p>
+                <p class="subtitle">Pilih kategori latihan di bawah ini sesuai dengan gaya mengetik yang ingin kamu kuasai.</p>
             </div>
             
             <div class="grid-cards">
@@ -416,24 +416,32 @@
                     <div class="card-icon-wrap">
                         <svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16m-7 6h7"/></svg>
                     </div>
-                    <h3>Paragraf Panjang Cepat</h3>
-                    <p>Latihan teks kalimat bermakna lengkap dengan huruf kapital, tanda koma, dan titik standar.</p>
+                    <h3>Paragraf Lengkap</h3>
+                    <p>Teks bermakna dengan tata bahasa lengkap (huruf kapital, koma, titik).</p>
+                </div>
+
+                <div class="glass-card" onclick="startMode('nopunctuation')">
+                    <div class="card-icon-wrap">
+                        <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </div>
+                    <h3>Tanpa Titik, Koma & Kapital</h3>
+                    <p>Latihan murni huruf kecil semua tanpa tanda baca untuk kecepatan maksimal.</p>
                 </div>
 
                 <div class="glass-card" onclick="startMode('symbols')">
                     <div class="card-icon-wrap">
                         <svg viewBox="0 0 24 24"><path d="M16 18l6-6-6-6M8 6l-6 6 6 6"/></svg>
                     </div>
-                    <h3>Kode Pemrograman & Simbol</h3>
-                    <p>Fokus melatih jari pada kurung siku, kurawal, titik koma, operator logika, dan angka khusus.</p>
+                    <h3>Kode & Simbol</h3>
+                    <p>Melatih jari pada kurung kurawa, operator logika, titik koma, dan angka.</p>
                 </div>
 
                 <div class="glass-card" onclick="startMode('basic')">
                     <div class="card-icon-wrap">
                         <svg viewBox="0 0 24 24"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
                     </div>
-                    <h3>Mengenal Huruf & Angka Dasar</h3>
-                    <p>Latihan pengenalan kombinasi huruf dasar dan angka untuk pemula yang ingin membangun fondasi.</p>
+                    <h3>Huruf & Angka Dasar</h3>
+                    <p>Pengenalan kombinasi alfabet dasar dan angka untuk membangun fondasi memori otot.</p>
                 </div>
             </div>
         </section>
@@ -473,15 +481,20 @@
                 "Pemrograman komputer membutuhkan ketelitian yang tinggi, karena satu kesalahan kecil seperti titik koma yang tertinggal bisa membuat seluruh program gagal berjalan. Seorang developer handal selalu rajin membaca dokumentasi.",
                 "Membangun sebuah game dari nol adalah impian banyak programmer pemula. Mulai dari merancang alur cerita, mendesain antarmuka, hingga menulis skrip pergerakan karakter, semuanya memerlukan kesabaran ekstra."
             ],
+            nopunctuation: [
+                "di sebuah desa yang tenang teknologi berkembang sangat cepat membawa perubahan besar bagi kehidupan sehari hari banyak anak muda mulai belajar pemrograman kecerdasan buatan hingga pengembangan game secara otodidak",
+                "pemrograman komputer membutuhkan ketelitian yang tinggi karena satu kesalahan kecil bisa membuat seluruh program gagal berjalan seorang developer handal selalu rajin membaca dokumentasi dan menguji kode buatannya",
+                "membangun sebuah game dari nol adalah impian banyak programmer pemula mulai dari merancang alur cerita mendesain antarmuka hingga menulis skrip pergerakan karakter semuanya memerlukan kesabaran ekstra"
+            ],
             symbols: [
                 "const x = 100; let y = 200; if (x !== y) { console.log('Hello, World!'); } // Cek logika dasar pemrograman.",
-                "Email: support@typenexus.dev | Status: Active (v2.1.4). Pastikan token akses API sudah dikonfigurasi dengan benar!",
+                "Email: support@zerrytype.dev | Status: Active (v2.1.4). Pastikan token akses API sudah dikonfigurasi dengan benar!",
                 "Fungsi matematika: f(x) = 3x^2 + 5x - 12. Gunakan modul kalkulus untuk menyelesaikannya secara akurat!"
             ],
             basic: [
                 "a b c d e f g h i j k l m n o p q r s t u v w x y z 1 2 3 4 5 6 7 8 9 0",
-                "Ketik huruf kapital dan huruf kecil secara bergantian dengan teliti dan konsisten.",
-                "Latihan dasar memperkuat memori otot pada jari tangan kiri dan kanan secara merata."
+                "ketik huruf kapital dan huruf kecil secara bergantian dengan teliti dan konsisten setiap hari",
+                "latihan dasar memperkuat memori otot pada jari tangan kiri dan kanan secara merata tanpa henti"
             ]
         };
 
@@ -509,7 +522,8 @@
         function startMode(mode) {
             currentMode = mode;
             let titles = {
-                paragraph: "Mode: Paragraf Panjang Cepat",
+                paragraph: "Mode: Paragraf Lengkap",
+                nopunctuation: "Mode: Tanpa Titik, Koma & Kapital",
                 symbols: "Mode: Kode & Simbol",
                 basic: "Mode: Huruf & Angka Dasar"
             };
