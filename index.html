@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Latihan Mengetik Cepat</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #121212;
+            color: #e0e0e0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            width: 700px;
+            background: #1e1e1e;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.4);
+        }
+        h2 {
+            margin-top: 0;
+            color: #bb86fc;
+            text-align: center;
+        }
+        #text-display {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            letter-spacing: 0.5px;
+            background: #2d2d2d;
+            padding: 15px;
+            border-radius: 8px;
+            user-select: none;
+        }
+        .correct { color: #03dac6; }
+        .incorrect { color: #cf6679; background-color: rgba(207, 102, 121, 0.2); text-decoration: underline; }
+        .current { text-decoration: underline; }
+        
+        #text-input {
+            width: 100%;
+            height: 80px;
+            background: #2d2d2d;
+            border: 1px solid #444;
+            color: #fff;
+            padding: 12px;
+            font-size: 1rem;
+            border-radius: 6px;
+            resize: none;
+            box-sizing: border-box;
+        }
+        #text-input:focus {
+            outline: none;
+            border-color: #bb86fc;
+        }
+        .stats {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #03dac6;
+        }
+        button {
+            margin-top: 15px;
+            width: 100%;
+            padding: 10px;
+            background: #bb86fc;
+            color: #121212;
+            border: none;
+            font-weight: bold;
+            font-size: 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #9a67ea;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Latihan Mengetik Paragraf</h2>
+    <div id="text-display"></div>
+    <textarea id="text-input" placeholder="Mulai ketik di sini..." autofocus></textarea>
+    
+    <div class="stats">
+        <span id="wpm">WPM: 0</span>
+        <span id="accuracy">Akurasi: 100%</span>
+        <span id="timer">Waktu: 0s</span>
+    </div>
+    
+    <button onclick="resetTest()">Ulangi (Reset)</button>
+</div>
+
+<script>
+    const paragraph = "Di sebuah desa yang tenang, teknologi berkembang sangat cepat, membawa perubahan besar bagi kehidupan sehari-hari. Banyak anak muda mulai belajar pemrograman, kecerdasan buatan, hingga pengembangan game secara otodidak. Tantangan utamanya bukan lagi keter akses informasi, melainkan bagaimana menyaring hoaks dan fokus pada hal yang produktif. Oleh karena itu, konsistensi adalah kunci utama untuk menguasai skill baru.";
+    
+    const display = document.getElementById('text-display');
+    const input = document.getElementById('text-input');
+    const wpmDisplay = document.getElementById('wpm');
+    const accDisplay = document.getElementById('accuracy');
+    const timerDisplay = document.getElementById('timer');
+
+    let timer = null;
+    let startTime = null;
+    let isStarted = false;
+
+    function initParagraph() {
+        display.innerHTML = '';
+        paragraph.split('').forEach(char => {
+            const span = document.createElement('span');
+            span.innerText = char;
+            display.appendChild(span);
+        });
+    }
+
+    input.addEventListener('input', () => {
+        if (!isStarted) {
+            isStarted = true;
+            startTime = new Date();
+            timer = setInterval(updateStats, 1000);
+        }
+
+        const arrayChar = display.querySelectorAll('span');
+        const arrayValue = input.value.split('');
+        
+        let correctChars = 0;
+
+        arrayChar.forEach((charSpan, index) => {
+            const char = arrayValue[index];
+
+            if (char == null) {
+                charSpan.classList.remove('correct', 'incorrect');
+            } else if (char === charSpan.innerText) {
+                charSpan.classList.add('correct');
+                charSpan.classList.remove('incorrect');
+                correctChars++;
+            } else {
+                charSpan.classList.add('incorrect');
+                charSpan.classList.remove('correct');
+            }
+        });
+
+        // Cek jika selesai
+        if (arrayValue.length === arrayChar.length) {
+            clearInterval(timer);
+            input.disabled = true;
+        }
+
+        const accuracy = Math.round((correctChars / arrayValue.length) * 100) || 100;
+        accDisplay.innerText = `Akurasi: ${accuracy}%`;
+    });
+
+    function updateStats() {
+        const currentTime = new Date();
+        const elapsedMinutes = (currentTime - startTime) / 60000;
+        const wordsTyped = input.value.trim().split(/\s+/).length;
+        
+        const wpm = elapsedMinutes > 0 ? Math.round(wordsTyped / elapsedMinutes) : 0;
+        const seconds = Math.floor((currentTime - startTime) / 1000);
+
+        wpmDisplay.innerText = `WPM: ${wpm}`;
+        timerDisplay.innerText = `Waktu: ${seconds}s`;
+    }
+
+    function resetTest() {
+        clearInterval(timer);
+        input.value = '';
+        input.disabled = false;
+        isStarted = false;
+        wpmDisplay.innerText = 'WPM: 0';
+        accDisplay.innerText = 'Akurasi: 100%';
+        timerDisplay.innerText = 'Waktu: 0s';
+        initParagraph();
+        input.focus();
+    }
+
+    initParagraph();
+</script>
+
+</body>
+</html>
