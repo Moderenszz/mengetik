@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ZerryType — Platform Latihan Mengetik Modern</title>
+    <title>ZerryType — Website Tes Kecepatan Mengetik Keyboard Online</title>
+    <meta name="description" content="ZerryType adalah platform latihan dan website tes kecepatan mengetik keyboard online gratis dengan tingkat kesulitan berjenjang, mode pemrograman, indikator huruf real-time, serta desain estetik.">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -35,7 +36,6 @@
             position: relative;
         }
 
-        /* Ambient Animated Background & Border Decorations */
         .bg-glow-orb {
             position: fixed;
             width: 500px;
@@ -49,7 +49,6 @@
         .orb-1 { top: -150px; left: -150px; }
         .orb-2 { bottom: -150px; right: -150px; }
 
-        /* Side Cyber Borders */
         .border-decor-left, .border-decor-right {
             position: fixed;
             top: 0;
@@ -62,7 +61,6 @@
         .border-decor-left { left: 0; border-right: 1px dashed rgba(56, 189, 248, 0.2); }
         .border-decor-right { right: 0; border-left: 1px dashed rgba(56, 189, 248, 0.2); }
 
-        /* Top Navbar */
         header {
             display: flex;
             justify-content: space-between;
@@ -122,7 +120,6 @@
             font-weight: 700;
         }
 
-        /* Main Wrapper */
         main {
             flex: 1;
             display: flex;
@@ -151,7 +148,6 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Hero / Home Section */
         .hero {
             text-align: center;
             max-width: 800px;
@@ -179,7 +175,6 @@
             margin-bottom: 30px;
         }
 
-        /* Level Tabs Selection */
         .level-tabs {
             display: flex;
             justify-content: center;
@@ -222,7 +217,6 @@
             animation: fadeIn 0.3s ease;
         }
 
-        /* Features Intro Grid */
         .features-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -251,7 +245,6 @@
             line-height: 1.5;
         }
 
-        /* Glass Cards for Selection */
         .glass-card {
             background: var(--card-bg);
             border: 1px solid var(--card-border);
@@ -303,7 +296,6 @@
             line-height: 1.5;
         }
 
-        /* Arena Typing UI */
         .arena-wrapper {
             max-width: 900px;
             margin: 0 auto;
@@ -379,7 +371,6 @@
             overflow-y: auto;
         }
 
-        /* Active typing cursor highlight */
         #text-display span.current {
             border-left: 2px solid #38bdf8;
             background: rgba(56, 189, 248, 0.15);
@@ -431,13 +422,11 @@
 </head>
 <body>
 
-    <!-- Cyber Border Decorations -->
     <div class="border-decor-left"></div>
     <div class="border-decor-right"></div>
     <div class="bg-glow-orb orb-1"></div>
     <div class="bg-glow-orb orb-2"></div>
 
-    <!-- SVG Definitions for Gradient Icons -->
     <svg style="width:0;height:0;position:absolute;" aria-hidden="true">
       <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
         <stop offset="0%" stop-color="#ffffff" />
@@ -445,7 +434,6 @@
       </linearGradient>
     </svg>
 
-    <!-- Header / Navbar -->
     <header>
         <div class="logo" onclick="switchPage('home')">
             <svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
@@ -457,17 +445,14 @@
         </ul>
     </header>
 
-    <!-- Content Area -->
     <main>
-        <!-- Home Page -->
         <section id="page-home" class="page active">
             <div class="hero">
-                <h1 class="hero-title">Tingkatkan Kecepatan & <span>Akurasi Mengetik</span></h1>
-                <p class="subtitle">Platform latihan mengetik interaktif buatan Zerry dengan tingkat kesulitan berjenjang, latar belakang neon elegan, dan indikator huruf real-time.</p>
-                <button class="btn-action" style="max-width: 220px; margin: 0 auto;" onclick="switchPage('practice')">Mulai Latihan Sekarang</button>
+                <h1 class="hero-title">Website Tes & Latihan <span>Kecepatan Mengetik</span></h1>
+                <p class="subtitle">Platform tes kecepatan mengetik keyboard online interaktif buatan Zerry dengan tingkat kesulitan berjenjang, latar belakang neon elegan, dan indikator huruf real-time.</p>
+                <button class="btn-action" style="max-width: 220px; margin: 0 auto;" onclick="switchPage('practice')">Mulai Tes Sekarang</button>
             </div>
 
-            <!-- Penjelasan Website -->
             <div style="margin-top: 40px;">
                 <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 20px; text-align: center;">Fitur Unggulan ZerryType</h3>
                 <div class="features-grid">
@@ -487,21 +472,18 @@
             </div>
         </section>
 
-        <!-- Practice Menu Page -->
         <section id="page-practice" class="page">
             <div class="hero" style="margin-bottom: 20px;">
                 <h1 class="hero-title">Pilih Level & <span>Mode Latihan</span></h1>
                 <p class="subtitle">Pilih tingkat kesulitan terlebih dahulu, lalu pilih mode latihan teks yang ingin kamu kuasai.</p>
             </div>
             
-            <!-- Level Tabs -->
             <div class="level-tabs">
                 <button class="level-tab active" onclick="switchLevel('easy')">Easy</button>
                 <button class="level-tab" onclick="switchLevel('medium')">Medium</button>
                 <button class="level-tab" onclick="switchLevel('hard')">Hard</button>
             </div>
 
-            <!-- LEVEL EASY -->
             <div id="level-easy" class="level-container active">
                 <div class="glass-card" onclick="startMode('easy_basic')">
                     <div class="card-icon-wrap"><svg viewBox="0 0 24 24"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></div>
@@ -520,7 +502,6 @@
                 </div>
             </div>
 
-            <!-- LEVEL MEDIUM -->
             <div id="level-medium" class="level-container">
                 <div class="glass-card" onclick="startMode('medium_paragraph')">
                     <div class="card-icon-wrap"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16m-7 6h7"/></svg></div>
@@ -539,7 +520,6 @@
                 </div>
             </div>
 
-            <!-- LEVEL HARD -->
             <div id="level-hard" class="level-container">
                 <div class="glass-card" onclick="startMode('hard_code')">
                     <div class="card-icon-wrap"><svg viewBox="0 0 24 24"><path d="M16 18l6-6-6-6M8 6l-6 6 6 6"/></svg></div>
@@ -559,7 +539,6 @@
             </div>
         </section>
 
-        <!-- Typing Arena Page -->
         <section id="page-arena" class="page">
             <div class="arena-wrapper">
                 <div class="arena-header">
@@ -578,7 +557,6 @@
                         <div class="stat-badge">Waktu: <span id="timer">0s</span></div>
                     </div>
                     
-                    <!-- Area Bacaan Teks -->
                     <div id="text-display"></div>
                     <textarea id="text-input" placeholder="Mulai ketik teks di atas pada kotak ini..." autofocus></textarea>
                     
@@ -739,7 +717,6 @@
                 }
             });
 
-            // Highlight current cursor position
             const currentIndex = arrayValue.length;
             if (currentIndex < arrayChar.length) {
                 arrayChar[currentIndex].classList.add('current');
